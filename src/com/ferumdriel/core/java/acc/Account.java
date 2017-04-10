@@ -21,4 +21,11 @@ public class Account {
         characters.add(e);
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 }
