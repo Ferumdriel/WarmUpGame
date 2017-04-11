@@ -42,4 +42,6 @@ public class AccountManager implements DBPostable {
         AccountManager manager = new AccountManager();
         manager.signUp("tescik","7456b");
     }
+
+
 }

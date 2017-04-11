@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Created by Mati on 4/9/2017.
  */
 public class Account {
-    private ArrayList<Entity> characters = new ArrayList<>();
+    private ArrayList<Character> characters = new ArrayList<>();
     private String login;
     private String password;
 
@@ -17,7 +17,7 @@ public class Account {
         this.password = password;
     }
 
-    public void addCharacter(Entity e){
+    public void addCharacter(Character e){
         characters.add(e);
     }
 
@@ -25,7 +25,13 @@ public class Account {
         return login;
     }
 
+
+
     public String getPassword() {
         return password;
+    }
+
+    public ArrayList<Character> getCharacters() {
+        return characters;
     }
 }
