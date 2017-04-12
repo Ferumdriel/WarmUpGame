@@ -27,7 +27,7 @@ public class CharacterManager {
     }
 
     private Hero createHero(String name){
-        return new Hero(name);
+        return new Hero(name, acc);
     }
 
     private void addHero(Hero p){

@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  */
 public class DBConnector{
 
-    private static DBConnector dbc;
+    private static DBConnector dbc; //is assigned in getInstance()
 
     private static final Logger LOGGER = Logger.getLogger("com.ferumdriel.database");
     private static final String USERNAME = "gracz";
