@@ -13,7 +13,7 @@ public class DBManager {
     private DBConnector dbConnector;
 
     public DBManager() throws Exception {
-        dbConnector = new DBConnector();
+        dbConnector = DBConnector.getInstance();
     }
 
     /**
@@ -39,7 +39,7 @@ public class DBManager {
 //            String varName0 = "id";
 //            String varName1 = "pierwszy";
 //            String varName2 = "ostatni";
-            dbConnector.useDB();
+//            dbConnector.useDB();
             PreparedStatement create = dbConnector.getConn().prepareStatement("CREATE TABLE IF NOT EXISTS aaa(id int NOT NULL AUTO_INCREMENT, first varchar(255), last varchar(255), PRIMARY KEY(id))");
             create.executeUpdate();
             logger.log(Level.INFO, "Table created");

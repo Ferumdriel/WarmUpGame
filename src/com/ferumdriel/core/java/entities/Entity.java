@@ -15,4 +15,8 @@ public class Entity {
     public Entity createEntity(String name){
         return new Entity(name);
     }
+
+    public String getName(){
+        return name;
+    }
 }
