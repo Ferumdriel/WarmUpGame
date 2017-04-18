@@ -1,7 +1,9 @@
-package com.ferumdriel.core.java.acc;
+package com.ferumdriel.core.java.acc.managers;
 
 import com.ferumdriel.core.database.DBConnector;
 import com.ferumdriel.core.database.DBPostable;
+import com.ferumdriel.core.java.acc.Account;
+import com.ferumdriel.core.java.entities.Hero;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,10 +19,12 @@ public class AccountManager implements DBPostable {
 
     private Account acc;
     private CharacterManager cm;
+    private DBPostManager postManager;
 
     public AccountManager(){
         acc = null;
         cm = null;
+        postManager = new DBPostManager();
     }
 
     /**
@@ -62,7 +66,7 @@ public class AccountManager implements DBPostable {
 
     private void signUp(String login, String password){
         acc = new Account(login, password);
-        post();
+        postManager.post();
     }
 
     /**
@@ -85,24 +89,9 @@ public class AccountManager implements DBPostable {
         return rs;
     }
 
-    /**
-     * Adds account to the database
-     */
-    @Override
-    public void post(){
-        String login = acc.getLogin();
-        String password = acc.getPassword();
-        try {
-            DBConnector conn = DBConnector.getInstance();
-            PreparedStatement post = conn.getConn().prepareStatement("INSERT into account(login, password) VALUES ('" + login + "','" + password + "')");
-            post.executeUpdate();
-            LOGGER.log(Level.INFO, "Account with Login: " + login + ", password: " + password + " added to the database");
-        }catch(SQLException e){
-            LOGGER.log(Level.SEVERE, "Unable to add account with Login: " + login + ", password: " + password + " to the database");
-            e.printStackTrace();
-        }
 
-    }
+
+
 
 
 
@@ -120,13 +109,14 @@ public class AccountManager implements DBPostable {
     }
 
     /**
-     * Testing field.
+     * TESTING METHOD.
      * @param args
      */
     public static void main(String[] args){
         AccountManager manager = new AccountManager();
-//        manager.signUp("baza","probamikrofonu");
-        manager.signIn("baba","lala");
+        manager.signUp("tance","probamikrofonu");
+        manager.signIn("tance","probamikrofonu");
+        manager.createHero("AndrzejDuda");
     }
 
     /**
@@ -146,5 +136,56 @@ public class AccountManager implements DBPostable {
         }catch(SQLException e){
 
         }
+    }
+
+    private void getCharacterList(ResultSet rs){
+
+    }
+
+    public class DBPostManager implements DBPostable{
+        /**
+         * Adds account to the database
+         */
+        @Override
+        public void post(){
+            String login = acc.getLogin();
+            String password = acc.getPassword();
+            try {
+                DBConnector conn = DBConnector.getInstance();
+                PreparedStatement post = conn.getConn().prepareStatement("INSERT into account(login, password) VALUES ('" + login + "','" + password + "')");
+                post.executeUpdate();
+                LOGGER.log(Level.INFO, "Account with Login: " + login + ", password: " + password + " added to the database");
+            }catch(SQLException e){
+                LOGGER.log(Level.SEVERE, "Unable to add account with Login: " + login + ", password: " + password + " to the database");
+                e.printStackTrace();
+            }
+
+        }
+
+
+        @Override
+        public void postCharacter(String name){
+            int idAccount = acc.getId();
+            int level = 1;
+            try {
+                DBConnector conn = DBConnector.getInstance();
+                PreparedStatement post = conn.getConn().prepareStatement("INSERT into character(name, level, idAccount) VALUES ('" + name + "','" + level + "','" + idAccount + "')");
+                post.executeUpdate();
+                LOGGER.log(Level.INFO, "Character: " + name + " has been added to account with ID: " + idAccount);
+            }catch(SQLException e){
+                LOGGER.log(Level.SEVERE, "Unable to add Character: " + name + " to account with ID: " + idAccount);
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+
+    /**
+     * METHODS CONNECTED WITH CHARACTER MANAGER
+     */
+    private void createHero(String name){
+        acc.addPlayer(cm.createHero(name));
+        postCharacter(name);
     }
 }

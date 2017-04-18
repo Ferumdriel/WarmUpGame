@@ -1,6 +1,7 @@
-package com.ferumdriel.core.java.acc;
+package com.ferumdriel.core.java.acc.managers;
 
 
+import com.ferumdriel.core.java.acc.Account;
 import com.ferumdriel.core.java.entities.Hero;
 
 import java.util.ArrayList;
@@ -12,13 +13,11 @@ import java.util.ArrayList;
  * CharacterManager is a subclass of AccountManager.
  */
 public class CharacterManager {
-    private AccountManager am;
     private Hero curr;
     private Account acc;
 
-    public CharacterManager(AccountManager am){
-        this.am = am;
-        acc = am.getAcc();
+    public CharacterManager(Account acc){
+        this.acc = acc;
         curr = null;
     }
 
@@ -26,7 +25,7 @@ public class CharacterManager {
         return acc.getHeroes();
     }
 
-    private Hero createHero(String name){
+    public Hero createHero(String name){
         return new Hero(name, acc);
     }
 
@@ -61,8 +60,11 @@ public class CharacterManager {
     }
 
 
-
     public static void main(String[] args){
 
+    }
+
+    private void setAcc(Account acc){
+        this.acc = acc;
     }
 }

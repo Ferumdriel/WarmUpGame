@@ -9,12 +9,15 @@ public class Hero extends Entity{
     private Account acc;
     private int level;
     private int exp;
+    private static int currHeroId = 0;
+    private int id;
 
     public Hero(String name, Account acc){
         super(name);
         this.acc = acc;
         level = 1;
         exp = 0;
+        id = currHeroId++;
     }
 
     private void levelUp(){

@@ -11,10 +11,14 @@ public class Account {
     private ArrayList<Hero> heroes = new ArrayList<>();
     private String login;
     private String password;
+    private static int currId;
+    private int id;
 
     public Account(String login, String password){
         this.login = login;
         this.password = password;
+        this.id = currId;
+        currId++;
     }
 
     public void addPlayer(Hero e){
@@ -33,5 +37,9 @@ public class Account {
 
     public ArrayList<Hero> getHeroes() {
         return heroes;
+    }
+
+    public int getId() {
+        return id;
     }
 }
