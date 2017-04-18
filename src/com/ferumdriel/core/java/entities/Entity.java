@@ -19,4 +19,9 @@ public class Entity {
     public String getName(){
         return name;
     }
+
+    public String toString(){
+        String s = getClass().getName() + " called: " + name;
+        return s;
+    }
 }

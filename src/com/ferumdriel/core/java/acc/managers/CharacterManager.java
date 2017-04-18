@@ -2,7 +2,7 @@ package com.ferumdriel.core.java.acc.managers;
 
 
 import com.ferumdriel.core.java.acc.Account;
-import com.ferumdriel.core.java.entities.Hero;
+import com.ferumdriel.core.java.entities.heroes.Hero;
 
 import java.util.ArrayList;
 

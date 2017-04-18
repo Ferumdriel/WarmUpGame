@@ -1,11 +1,12 @@
-package com.ferumdriel.core.java.entities;
+package com.ferumdriel.core.java.entities.heroes;
 
 import com.ferumdriel.core.java.acc.Account;
+import com.ferumdriel.core.java.entities.Entity;
 
 /**
  * Created by Mati on 4/11/2017.
  */
-public class Hero extends Entity{
+public class Hero extends Entity {
     private Account acc;
     private int level;
     private int exp;

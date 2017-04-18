@@ -3,7 +3,6 @@ package com.ferumdriel.core.java.acc.managers;
 import com.ferumdriel.core.database.DBConnector;
 import com.ferumdriel.core.database.DBPostable;
 import com.ferumdriel.core.java.acc.Account;
-import com.ferumdriel.core.java.entities.Hero;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
